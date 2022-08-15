@@ -1,0 +1,135 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+
+{% if user.is_authenticated %}
+
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="booking-cta">
+            <h1>Book your flight today</h1>
+            <p style="color:#743da1">
+              Welcome {{ request.user }} To Our Website.You can find your best
+              suitable journey here
+            </p>
+          </div>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+          <div class="booking-form">
+            <form method="POST" action="{% url 'searchairline' %}">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <span class="form-label">Select Flight</span>
+                    <select class="form-control" name="fflight">
+                      <option>Domestic</option>
+                      <option>International</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span class="form-label">Flying from</span>
+                    <input
+                      class="form-control"
+                      name="ffrom"
+                      type="text"
+                      placeholder="City or airport"
+					  required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span class="form-label">Flyning to</span>
+                    <input
+                      class="form-control"
+                      name="fto"
+                      type="text"
+                      placeholder="City or airport"
+					  required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <span class="form-label">Departing</span>
+                    <input
+                      class="form-control"
+                      name="date"
+                      type="text"
+                      placeholder="mm/dd/yyyy"
+                      required
+                    />
+                  </div>
+                </div>
+                {% comment %} <div class="col-md-6">
+                  <div class="form-group">
+                    <span class="form-label">Returning</span>
+                    <input
+                      class="form-control"
+                      name="date2"
+                      type="date"
+                      required
+                    />
+                  </div>
+                </div> {% endcomment %}
+              </div>
+              {% comment %} <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <span class="form-label">Adults (18+)</span>
+                    <select class="form-control" name="adult">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <span class="form-label">Children (0-17)</span>
+                    <select class="form-control" name="child">
+                      <option>0</option>
+                      <option>1</option>
+                      <option>2</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <span class="form-label">Travel class</span>
+                    <select class="form-control" name="fclass">
+                      <option>Economy class</option>
+                      <option>Business class</option>
+                      <option>First class</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+              </div> {% endcomment %}
+              <div class="form-btn">
+                <button class="submit-btn" type="submit">Show flights</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div style="height : 90vh">
+<h1 class="text-center my-2 text-danger">You Are Not A Authenticate User</h1>
+</div>
+{% endif %}
+
+{% endblock %}
